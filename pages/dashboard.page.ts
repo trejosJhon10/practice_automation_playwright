@@ -1,5 +1,6 @@
 import { Locator, Page, expect } from '@playwright/test'
 import { confirm_dialog, dismiss_dialog } from '../utilities/utility'
+import { LOGOUT_MESSAGE_DIALOG } from '../constants'
 
 export class DashBoardPage {
     readonly page: Page
@@ -17,14 +18,12 @@ export class DashBoardPage {
     }
 
     async logout() {
-        const logOugMessage= "Are you sure you want to logout?"
-        confirm_dialog(this.page, logOugMessage)
+        confirm_dialog(this.page, LOGOUT_MESSAGE_DIALOG)
         await this.logOutBtn.click()
     }
 
     async cancelLogOut(){
-        const logOugMessage= "Are you sure you want to logout?"
-        dismiss_dialog(this.page, logOugMessage)
+        dismiss_dialog(this.page, LOGOUT_MESSAGE_DIALOG)
         await this.logOutBtn.click()
     }
 
