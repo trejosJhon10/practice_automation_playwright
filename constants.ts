@@ -1,0 +1,1 @@
+export const LOGOUT_MESSAGE_DIALOG = "Are you sure you want to logout?"
