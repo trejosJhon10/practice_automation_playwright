@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from '@playwright/test'
-import { confirm_dialog, dismiss_dialog } from '../utilities/utility'
+import { confirm_dialog, dismiss_dialog } from '../utils/utility'
 import { LOGOUT_MESSAGE_DIALOG } from '../constants'
 
 export class DashBoardPage {
