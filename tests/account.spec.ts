@@ -1,4 +1,4 @@
-import { expect } from '@playwright/test'
+import { expect } from '../fixtures/expect.fixture'
 import { test } from '../fixtures/pages.fixtures'
 
 test.describe('Create a new account', () => {
