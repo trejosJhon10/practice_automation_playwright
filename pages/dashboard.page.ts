@@ -8,6 +8,19 @@ export class DashBoardPage {
     readonly activeAccountsCard: Locator
     readonly totalTransactionsCard: Locator
     readonly logOutBtn: Locator
+    readonly navigationHeader: Locator
+    readonly summarySection: Locator
+    readonly quickActionsSection: Locator
+    readonly quickStatsSection: Locator
+    readonly pinnedAccountSection: Locator
+    readonly recentTransactionSection: Locator
+    readonly accountsOverviewSection: Locator
+    readonly navigationDashBoardBtn: Locator
+    readonly navigationAccountsBtn: Locator
+    readonly navigationTransactionsBtn: Locator
+    readonly navigationHelpAndDocsBtn: Locator
+    readonly navigationUserInfo: Locator
+    readonly navigationBrandName: Locator
 
     constructor(page: Page) {
         this.page = page
@@ -15,6 +28,19 @@ export class DashBoardPage {
         this.activeAccountsCard = page.getByTestId('accounts-count-card')
         this.totalTransactionsCard = page.getByTestId('transactions-count-card')
         this.logOutBtn = page.getByRole('button', { name: 'Logout' });
+        this.navigationHeader = page.getByTestId('main-navbar')
+        this.summarySection = page.locator('#summary-section')
+        this.quickActionsSection = page.locator('#quick-actions')
+        this.quickStatsSection = page.locator('#quick-stats-section')
+        this.pinnedAccountSection = page.locator('#pinned-accounts-section')
+        this.recentTransactionSection = page.locator('#recent-transactions-section')
+        this.accountsOverviewSection = page.locator('#accounts-overview')
+        this.navigationDashBoardBtn = page.getByTestId('nav-dashboard')
+        this.navigationAccountsBtn = page.getByTestId('nav-accounts')
+        this.navigationTransactionsBtn = page.getByTestId('nav-transactions')
+        this.navigationHelpAndDocsBtn = page.getByTestId('help-link')
+        this.navigationUserInfo = page.locator('#username-display')
+        this.navigationBrandName = page.locator('#brand-name')
     }
 
     async logout() {
