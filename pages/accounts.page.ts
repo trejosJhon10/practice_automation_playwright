@@ -1,4 +1,5 @@
-import { Locator, Page, expect} from '@playwright/test'
+import { Locator, Page } from '@playwright/test'
+import { expect } from '../fixtures/expect.fixture'
 import { NEW_ACCOUNT_SUCCESS_MESSAGE } from '../test-data/constants'
 
 export class AccountsPage {
@@ -30,25 +31,32 @@ export class AccountsPage {
     async setAccountName(name:string){
         await this.accountNameInput.fill(name)
     }
+
     async selectAccountType(option: 'Savings Account'|'Checking Account'|'Credit Card') {
         await this.accountTypeSelect.click();
         await this.page.getByRole('option').getByText(option).click();
     }
+
     async setInitialAccountBalance(balance:number){
         await this.initialBalanceInput.fill(balance.toString())
     }
+
     async setAccountStatus(status: 'Active'|'Inactive'){
         await this[`status${status}RadioBtn`].click()
     }
+
     async toggleOverdraftCheckbox(){
         await this.overdraftCheckbox.check()
     }
+
     async cancelNewAccount(){
         await this.newAccountCancelBtn.click()
     }
+
     async saveNewAccount(){
         await this.newAccountSaveBtn.click()
     }
+    
     async waitForSuccessToast(){
         await expect(this.newAccountSuccessToast).toBeVisible()
         expect(await this.newAccountSuccessToast.textContent()).toBe(NEW_ACCOUNT_SUCCESS_MESSAGE)

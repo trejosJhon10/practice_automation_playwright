@@ -1,4 +1,4 @@
-import { Locator, Page, expect } from '@playwright/test'
+import { Locator, Page } from '@playwright/test'
 import { confirm_dialog, dismiss_dialog } from '../utils/utility'
 import { LOGOUT_MESSAGE_DIALOG } from '../test-data/constants'
 
@@ -11,6 +11,13 @@ export class DashBoardPage {
     readonly addAccountBtn: Locator
     readonly logOutBtn: Locator
     readonly pageContainer: Locator
+    readonly navigationHeader: Locator
+    readonly summarySection: Locator
+    readonly quickActionsSection: Locator
+    readonly quickStatsSection: Locator
+    readonly pinnedAccountSection: Locator
+    readonly recentTransactionSection: Locator
+    readonly accountsOverviewSection: Locator
 
     constructor(page: Page) {
         this.page = page
@@ -21,6 +28,13 @@ export class DashBoardPage {
         this.addAccountBtn = page.getByTestId('quick-add-account')
         this.pageContainer = page.locator('#dashboard-page-container')
         this.logOutBtn = page.getByRole('button', { name: 'Logout' });
+        this.navigationHeader = page.getByTestId('main-navbar')
+        this.summarySection = page.locator('#summary-section')
+        this.quickActionsSection = page.locator('#quick-actions')
+        this.quickStatsSection = page.locator('#quick-stats-section')
+        this.pinnedAccountSection = page.locator('#pinned-accounts-section')
+        this.recentTransactionSection = page.locator('#recent-transactions-section')
+        this.accountsOverviewSection = page.locator('#accounts-overview')
     }
 
     async logout() {
@@ -36,6 +50,7 @@ export class DashBoardPage {
     async clickAddAccountBtn() {
         await this.addAccountBtn.click()
     }
+
     async obtainTotalBalance(){
         await this.page.waitForTimeout(3000)
         const rawText = await this.totalBalanceValue.innerText()
