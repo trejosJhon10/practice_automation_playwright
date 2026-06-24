@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test'
 import { test } from '../fixtures/pages.fixtures'
-import { ALERT_INVALID_LOGIN_MESSAGE } from '../constants.ts'
+import { ALERT_INVALID_LOGIN_MESSAGE } from '../test-data/constants'
 
 test.describe('Login process test', () => {
 

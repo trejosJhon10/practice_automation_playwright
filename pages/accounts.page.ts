@@ -1,5 +1,5 @@
 import { Locator, Page, expect} from '@playwright/test'
-import { NEW_ACCOUNT_SUCCESS_MESSAGE } from '../constants'
+import { NEW_ACCOUNT_SUCCESS_MESSAGE } from '../test-data/constants'
 
 export class AccountsPage {
     readonly page: Page;
