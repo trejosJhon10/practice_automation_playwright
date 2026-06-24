@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test'
 import { expect } from '../fixtures/expect.fixture'
-import { NEW_ACCOUNT_SUCCESS_MESSAGE } from '../constants'
+import { NEW_ACCOUNT_SUCCESS_MESSAGE } from '../test-data/constants'
 
 export class AccountsPage {
     readonly page: Page;
