@@ -17,8 +17,8 @@ test.describe('Login process test', () => {
         await expect(dashBoardPage.logOutBtn).toBeVisible()
     }),
 
-    test('user is able to use the toggle password btn', async ({loginPage, dashBoardPage}) => {
-        await dashBoardPage.logout()
+    test('user is able to use the toggle password btn', async ({loginPage, navigationPage}) => {
+        await navigationPage.logout()
         await expect(loginPage.userNameInput).toBeVisible()
 
         await loginPage.login('fake', 'fake123');
@@ -29,19 +29,19 @@ test.describe('Login process test', () => {
         expect(await loginPage.passwordInput.inputValue()).toBe('fake123')
     }),
 
-    test('User is able to login and log out from the app', async ({ loginPage, dashBoardPage }) => {
-        await expect(dashBoardPage.logOutBtn).toBeVisible()
+    test('User is able to login and log out from the app', async ({ loginPage, navigationPage }) => {
+        await expect(navigationPage.logOutBtn).toBeVisible()
 
-        await dashBoardPage.cancelLogOut()
-        await expect(dashBoardPage.logOutBtn).toBeVisible()
+        await navigationPage.cancelLogOut()
+        await expect(navigationPage.logOutBtn).toBeVisible()
 
-        await dashBoardPage.logout()
+        await navigationPage.logout()
         await expect(loginPage.userNameInput).toBeVisible()
         await expect(loginPage.passwordInput).toBeVisible()
     }),
 
-    test('User is able to see error messages when wrong login', async( {loginPage, dashBoardPage }) => {
-        await dashBoardPage.logout()
+    test('User is able to see error messages when wrong login', async( {loginPage, navigationPage }) => {
+        await navigationPage.logout()
         await expect(loginPage.userNameInput).toBeVisible()
 
         await loginPage.login('fake', 'fake123')

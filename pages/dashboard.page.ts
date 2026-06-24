@@ -1,6 +1,4 @@
 import { Locator, Page } from '@playwright/test'
-import { confirm_dialog, dismiss_dialog } from '../utils/utility'
-import { LOGOUT_MESSAGE_DIALOG } from '../test-data/constants'
 
 export class DashBoardPage {
     readonly page: Page
@@ -35,16 +33,6 @@ export class DashBoardPage {
         this.pinnedAccountSection = page.locator('#pinned-accounts-section')
         this.recentTransactionSection = page.locator('#recent-transactions-section')
         this.accountsOverviewSection = page.locator('#accounts-overview')
-    }
-
-    async logout() {
-        confirm_dialog(this.page, LOGOUT_MESSAGE_DIALOG)
-        await this.logOutBtn.click()
-    }
-
-    async cancelLogOut(){
-        dismiss_dialog(this.page, LOGOUT_MESSAGE_DIALOG)
-        await this.logOutBtn.click()
     }
 
     async clickAddAccountBtn() {
