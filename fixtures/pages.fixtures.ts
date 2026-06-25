@@ -2,6 +2,7 @@ import { LoginPage } from '../pages/login.page';
 import { DashBoardPage } from '../pages/dashboard.page';
 import { AccountsPage } from '../pages/accounts.page';
 import { NavigationPage } from '../pages/navigation.page';
+import { TransactionsPage } from '../pages/transactions.page';
 import { test as baseTest } from '@playwright/test';
 
 type MyPages = {
@@ -9,6 +10,7 @@ type MyPages = {
     dashBoardPage: DashBoardPage;
     accountsPage: AccountsPage;
     navigationPage: NavigationPage;
+    transactionsPage: TransactionsPage
 }
 
 export const test = baseTest.extend<MyPages>({
@@ -23,5 +25,8 @@ export const test = baseTest.extend<MyPages>({
     },
     navigationPage: async ({page}, use) => {
         await use(new NavigationPage(page))
+    },
+    transactionsPage: async ({page}, use) => {
+        await use(new TransactionsPage(page))
     }
 })

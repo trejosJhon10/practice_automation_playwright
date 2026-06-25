@@ -8,6 +8,8 @@ export class DashBoardPage {
     readonly activeAccountsCard: Locator
     readonly totalTransactionsCard: Locator
     readonly addAccountBtn: Locator
+    readonly newTransactionBtn: Locator
+    readonly viewAllAccountsBtn: Locator
     readonly logOutBtn: Locator
     readonly pageContainer: Locator
     readonly navigationHeader: Locator
@@ -25,6 +27,8 @@ export class DashBoardPage {
         this.activeAccountsCard = page.getByTestId('accounts-count-card')
         this.totalTransactionsCard = page.getByTestId('transactions-count-card')
         this.addAccountBtn = page.getByTestId('quick-add-account')
+        this.newTransactionBtn = page.getByTestId('quick-new-transaction')
+        this.viewAllAccountsBtn = page.getByTestId('quick-view-accounts')
         this.pageContainer = page.locator('#dashboard-page-container')
         this.logOutBtn = page.getByRole('button', { name: 'Logout' });
         this.navigationHeader = page.getByTestId('main-navbar')
@@ -38,6 +42,14 @@ export class DashBoardPage {
 
     async clickAddAccountBtn() {
         await this.addAccountBtn.click()
+    }
+
+    async clickNewTransaction() {
+        await this.newTransactionBtn.click()
+    }
+
+    async clickViewAllAccountsBtn(){
+        await this.viewAllAccountsBtn.click()
     }
 
     async obtainTotalBalance(){
