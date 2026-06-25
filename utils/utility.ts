@@ -1,4 +1,4 @@
-import { Page, expect } from "@playwright/test";
+import { Locator, Page, expect } from "@playwright/test";
 
 export function confirm_dialog(page: Page, message_expected: string) {
   page.once("dialog", async (dialog) => {
@@ -11,4 +11,22 @@ export function dismiss_dialog(page: Page, message_expected: string) {
     expect(dialog.message()).toContain(message_expected);
     await dialog.dismiss();
   });
+}
+
+export async function waitForStableText(locator: Locator, stableFor = 1000) {
+  let lastValue = await locator.textContent();
+  let stableSince = Date.now();
+
+  while (Date.now() - stableSince < stableFor) {
+    await locator.page().waitForTimeout(100);
+
+    const currentValue = await locator.textContent();
+
+    if (currentValue !== lastValue) {
+      lastValue = currentValue;
+      stableSince = Date.now();
+    }
+  }
+
+  return lastValue;
 }
