@@ -32,11 +32,18 @@ test.describe('Dashboard tests suite', () => {
         await expect(dashBoardPage.page).toHaveURL('https://qaplayground.com/bank/dashboard')
         await waitForStableText(dashBoardPage.totalBalanceValue)
         
-        await dashBoardPage.clicNewTransaction()
+        await dashBoardPage.clickNewTransaction()
         await expect(transactionsPage.page).toHaveURL('https://qaplayground.com/bank/transactions?action=new')
         await expect(transactionsPage.newTransactionModal).toBeVisible()
         await transactionsPage.cancelNewAccount()
         await expect(transactionsPage.newTransactionModal).toBeHidden()
+
+        await navigationPage.gotoDashboard()
+        await expect(dashBoardPage.page).toHaveURL('https://qaplayground.com/bank/dashboard')
+        await waitForStableText(dashBoardPage.totalBalanceValue)
+
+        await dashBoardPage.clickViewAllAccountsBtn()
+        await expect(transactionsPage.page).toHaveURL('https://qaplayground.com/bank/accounts')
     });
 
 });
