@@ -24,7 +24,7 @@ export class AccountsPage {
         this.statusActiveRadioBtn = page.getByTestId('status-active-radio')
         this.statusInactiveRadioBtn = page.getByTestId('status-inactive-radio')
         this.overdraftCheckbox = page.getByTestId('overdraft-checkbox')
-        this.newAccountCancelBtn = page.getByTestId('cancel-btn')
+        this.newAccountCancelBtn = page.getByTestId('cancel-button')
         this.newAccountSaveBtn = page.getByTestId('save-account-button')
         this.newAccountSuccessToast = page.locator('li[data-type="success"]')
     }

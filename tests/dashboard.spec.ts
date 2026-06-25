@@ -21,4 +21,22 @@ test.describe('Dashboard tests suite', () => {
         await expect(dashBoardPage.accountsOverviewSection).toBeReadyForInteraction()
     });
 
+    test('Dashboard quick actions navigation', async({dashBoardPage, accountsPage, navigationPage, transactionsPage}) => {
+        await dashBoardPage.clickAddAccountBtn()
+        await expect(accountsPage.page).toHaveURL('https://qaplayground.com/bank/accounts?action=add')
+        await expect(accountsPage.newAccountModal).toBeVisible()
+        await accountsPage.cancelNewAccount()
+        await expect(accountsPage.newAccountModal).not.toBeVisible()
+
+        await navigationPage.gotoDashboard()
+        await expect(dashBoardPage.page).toHaveURL('https://qaplayground.com/bank/dashboard')
+        await waitForStableText(dashBoardPage.totalBalanceValue)
+        
+        await dashBoardPage.clicNewTransaction()
+        await expect(transactionsPage.page).toHaveURL('https://qaplayground.com/bank/transactions?action=new')
+        await expect(transactionsPage.newTransactionModal).toBeVisible()
+        await transactionsPage.cancelNewAccount()
+        await expect(transactionsPage.newTransactionModal).toBeHidden()
+    });
+
 });
