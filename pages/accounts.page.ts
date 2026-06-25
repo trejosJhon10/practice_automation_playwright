@@ -14,6 +14,7 @@ export class AccountsPage {
     readonly newAccountCancelBtn: Locator
     readonly newAccountSaveBtn: Locator
     readonly newAccountSuccessToast: Locator
+    readonly accountsTable: Locator
     
     constructor(page: Page) {
         this.page = page
@@ -27,6 +28,7 @@ export class AccountsPage {
         this.newAccountCancelBtn = page.getByTestId('cancel-button')
         this.newAccountSaveBtn = page.getByTestId('save-account-button')
         this.newAccountSuccessToast = page.locator('li[data-type="success"]')
+        this.accountsTable = page.getByTestId('accounts-table')
     }
     async setAccountName(name:string){
         await this.accountNameInput.fill(name)
@@ -61,5 +63,10 @@ export class AccountsPage {
         await expect(this.newAccountSuccessToast).toBeVisible()
         expect(await this.newAccountSuccessToast.textContent()).toBe(NEW_ACCOUNT_SUCCESS_MESSAGE)
         await expect(this.newAccountSuccessToast).toBeHidden()
+    }
+
+    async getAccountTableRowByValue(text: string){
+        const targetRow = this.accountsTable.getByTestId(/^account-row-/).filter({ hasText: text})
+        return targetRow
     }
 }
