@@ -57,4 +57,23 @@ export class DashBoardPage {
         const rawText = await this.totalBalanceValue.innerText()
         return parseFloat(rawText.replace(/[^0-9.]/g,''))
     }
+
+    async getNumberOfActiveAccounts(){
+        await waitForStableText(this.totalBalanceValue);
+        return Number(await this.activeAccountsCard.getByTestId('accounts-count').innerText())
+    }
+
+    async getNumberOfPinnedAccounts(){
+        await waitForStableText(this.totalBalanceValue)
+        await this.pinnedAccountSection.scrollIntoViewIfNeeded()
+        
+        return await this.pinnedAccountSection.getByTestId(/^draggable-account-id/).count()
+    }
+
+    async getNumberOfAccountsOverView(){
+        await waitForStableText(this.totalBalanceValue)
+        await this.accountsOverviewSection.scrollIntoViewIfNeeded()
+        
+        return await this.accountsOverviewSection.locator('div.bg-card').count()
+    }
 }

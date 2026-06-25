@@ -1,5 +1,6 @@
 import { expect } from '../fixtures/expect.fixture'
 import { test } from '../fixtures/pages.fixtures'
+import { DashBoardPage } from '../pages/dashboard.page';
 import { waitForStableText } from '../utils/utility'
 
 test.describe('Dashboard tests suite', () => {
@@ -45,5 +46,25 @@ test.describe('Dashboard tests suite', () => {
         await dashBoardPage.clickViewAllAccountsBtn()
         await expect(transactionsPage.page).toHaveURL('https://qaplayground.com/bank/accounts')
     });
+
+    test('Active accounts info correctly displayed on dashboard', async ({ dashBoardPage, accountsPage, navigationPage }) => {
+        let active_accounts = await dashBoardPage.getNumberOfActiveAccounts()
+
+        await dashBoardPage.clickAddAccountBtn()
+        await accountsPage.setAccountName('University')
+        await accountsPage.selectAccountType('Credit Card')
+        await accountsPage.setInitialAccountBalance(1000.00)
+        await accountsPage.setAccountStatus('Active')
+        await accountsPage.saveNewAccount()
+        await accountsPage.waitForSuccessToast();
+        active_accounts = active_accounts + 1;
+
+        await navigationPage.gotoDashboard();
+        await waitForStableText(dashBoardPage.totalBalanceValue);
+
+        expect(await dashBoardPage.getNumberOfActiveAccounts()).toBe(active_accounts)
+        expect(await dashBoardPage.getNumberOfPinnedAccounts()).toBe(active_accounts)
+        expect(await dashBoardPage.getNumberOfAccountsOverView()).toBe(active_accounts)
+    })
 
 });
