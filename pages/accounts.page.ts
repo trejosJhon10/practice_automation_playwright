@@ -65,8 +65,8 @@ export class AccountsPage {
         await expect(this.newAccountSuccessToast).toBeHidden()
     }
 
-    async getAccountTableRowByValue(text: string){
-        const targetRow = this.accountsTable.getByTestId(/^account-row-/).filter({ hasText: text})
+    async getAccountsTableRowByValue(text: string){
+        const targetRow = this.accountsTable.getByTestId(/^account-row-/).filter({ hasText: text}) //
         return targetRow
     }
 }
