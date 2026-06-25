@@ -66,7 +66,6 @@ export class AccountsPage {
     }
 
     async getAccountsTableRowByValue(text: string){
-        const targetRow = this.accountsTable.getByTestId(/^account-row-/).filter({ hasText: text}) //
-        return targetRow
+        return this.accountsTable.getByTestId(/^account-row-/).filter({ hasText: text})
     }
 }
