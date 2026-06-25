@@ -31,6 +31,6 @@ export async function waitForStableText(locator: Locator, stableFor = 1000) {
   return lastValue;
 }
 
-export async function extractNumberFromString(string:string) {
+export async function extractNumberFromString(string:any) {
   return parseFloat(string.replace(/[^0-9.]/g,''))
 }

@@ -54,7 +54,6 @@ export class DashBoardPage {
 
     async obtainTotalBalance(){
         await waitForStableText(this.totalBalanceValue);
-        const number = extractNumberFromString(await this.totalBalanceValue.innerText())
-        return number
+        return extractNumberFromString(await this.totalBalanceValue.innerText())
     }
 }
