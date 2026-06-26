@@ -1,6 +1,6 @@
 import { expect } from '../fixtures/expect.fixture'
 import { test } from '../fixtures/pages.fixtures'
-import { extractNumberFromString } from '../utils/utility'
+import { extractNumberFromString, getShortAccountType } from '../utils/utility'
 
 test.describe('Create a new account', () => {
 
@@ -48,9 +48,8 @@ test.describe('Create a new account', () => {
 
         expect(await row.getByTestId('account-number').textContent()).not.toBeNull()
         expect(await row.getByTestId('account-name').textContent()).toBe(newAccountName)
-        expect(await row.getByTestId('account-type').textContent()).toBe(await accountsPage.getShortAccountType(newAccountType))
-        expect(await extractNumberFromString(await row.getByTestId('account-balance').textContent())).toBe(newAccountBalance)
+        expect(await row.getByTestId('account-type').textContent()).toBe(getShortAccountType(newAccountType))
+        expect(extractNumberFromString(await row.getByTestId('account-balance').textContent())).toBe(newAccountBalance)
         expect(await row.getByTestId('account-status').textContent()).toBe(newAccountStatus)
     })
-
 });

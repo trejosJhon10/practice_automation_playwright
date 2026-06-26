@@ -68,13 +68,4 @@ export class AccountsPage {
     async getAccountsTableRowByValue(text: string){
         return this.accountsTable.getByTestId(/^account-row-/).filter({ hasText: text})
     }
-    
-    async getShortAccountType(type: 'Savings Account'|'Checking Account'|'Credit Card'){
-        const accountDict: Record<string,string> = {
-            'Savings Account':'Savings',
-            'Checking Account':'Checking',
-            'Credit Card':'Credit'
-        }
-        return accountDict[type]
-    }
 }
