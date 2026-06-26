@@ -1,6 +1,5 @@
 import { expect } from '../fixtures/expect.fixture'
 import { test } from '../fixtures/pages.fixtures'
-import { DashBoardPage } from '../pages/dashboard.page';
 import { waitForStableText } from '../utils/utility'
 
 test.describe('Dashboard tests suite', () => {
