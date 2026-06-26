@@ -56,4 +56,23 @@ export class DashBoardPage {
         await waitForStableText(this.totalBalanceValue);
         return extractNumberFromString(await this.totalBalanceValue.innerText())
     }
+
+    async getNumberOfActiveAccounts(){
+        await waitForStableText(this.totalBalanceValue);
+        return Number(await this.activeAccountsCard.getByTestId('accounts-count').innerText())
+    }
+
+    async getNumberOfPinnedAccounts(){
+        await waitForStableText(this.totalBalanceValue)
+        await this.pinnedAccountSection.scrollIntoViewIfNeeded()
+        
+        return await this.pinnedAccountSection.getByTestId(/^draggable-account-id/).count()
+    }
+
+    async getNumberOfAccountsOverView(){
+        await waitForStableText(this.totalBalanceValue)
+        await this.accountsOverviewSection.scrollIntoViewIfNeeded()
+        
+        return await this.accountsOverviewSection.locator('div.bg-card').count()
+    }
 }
