@@ -75,4 +75,33 @@ export class DashBoardPage {
         
         return await this.accountsOverviewSection.locator('div.bg-card').count()
     }
+
+    async getPinnedAccountInfo(accountName: string){
+        await this.pinnedAccountSection.scrollIntoViewIfNeeded()
+
+        const pinnedAccountCard = this.pinnedAccountSection.getByTestId(/^draggable-account-id/).filter({ hasText: accountName})
+
+        const accountNameDisplayed = await pinnedAccountCard.locator('[id^="pinned-account-name-id"]').innerText()
+        const accountBalance = await pinnedAccountCard.locator('[id^="pinned-account-balance-id"]').innerText()
+        const accountDetails = await pinnedAccountCard.locator('div>p:last-of-type').innerText()
+        const accountType = accountDetails.split('•')[0].trim()
+        const accountNumber = accountDetails.split('•')[1].trim()
+        
+        return {accountNameDisplayed, accountBalance, accountType, accountNumber}
+    }
+
+    async getAccountsoverviewAccountInfo(accountName: string){
+        await this.accountsOverviewSection.scrollIntoViewIfNeeded()
+
+        const accountOverviewCard = this.accountsOverviewSection.locator('div.bg-card').filter({ hasText: accountName})
+
+        const accountStatus = await accountOverviewCard.locator('div>div.inline-flex').innerText()
+        const accountNameDisplayed = await accountOverviewCard.locator('[id^="account-name-id"]').innerText()
+        const accountBalance = await accountOverviewCard.locator('[id^="account-balance-id"]').innerText()
+        const accountDetails = await accountOverviewCard.locator('[id^="account-details-id"]').innerText()
+        const accountType = accountDetails.split('•')[0].trim()
+        const accountNumber = accountDetails.split('•')[1].trim()
+
+        return {accountStatus, accountNameDisplayed, accountBalance, accountType, accountNumber}
+    }
 }
