@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test'
-import { waitForStableText } from '../utils/utility'
+import { extractNumberFromString, waitForStableText } from '../utils/utility'
 
 export class DashBoardPage {
     readonly page: Page
@@ -54,8 +54,7 @@ export class DashBoardPage {
 
     async obtainTotalBalance(){
         await waitForStableText(this.totalBalanceValue);
-        const rawText = await this.totalBalanceValue.innerText()
-        return parseFloat(rawText.replace(/[^0-9.]/g,''))
+        return extractNumberFromString(await this.totalBalanceValue.innerText())
     }
 
     async getNumberOfActiveAccounts(){

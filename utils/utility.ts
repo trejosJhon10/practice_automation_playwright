@@ -30,3 +30,16 @@ export async function waitForStableText(locator: Locator, stableFor = 1000) {
 
   return lastValue;
 }
+
+export function extractNumberFromString(string:any) {
+  return parseFloat(string.replace(/[^0-9.]/g,''))
+}
+
+export function getShortAccountType(type: 'Savings Account'|'Checking Account'|'Credit Card'){
+  const accountDict: Record<string,string> = {
+    'Savings Account':'Savings',
+    'Checking Account':'Checking',
+    'Credit Card':'Credit'
+    }
+  return accountDict[type]
+}
