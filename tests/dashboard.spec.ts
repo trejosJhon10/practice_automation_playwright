@@ -1,6 +1,6 @@
 import { expect } from '../fixtures/expect.fixture'
 import { test } from '../fixtures/pages.fixtures'
-import { waitForStableText } from '../utils/utility'
+import { waitForStableText, getShortAccountType, extractNumberFromString } from '../utils/utility'
 
 test.describe('Dashboard tests suite', () => {
 
@@ -64,6 +64,41 @@ test.describe('Dashboard tests suite', () => {
         expect(await dashBoardPage.getNumberOfActiveAccounts()).toBe(active_accounts)
         expect(await dashBoardPage.getNumberOfPinnedAccounts()).toBe(active_accounts)
         expect(await dashBoardPage.getNumberOfAccountsOverView()).toBe(active_accounts)
+    })
+
+    test('New account details are displayed consistently across the dashboard', async ({ dashBoardPage, accountsPage, navigationPage}) => {
+        const newAccountName = 'Trip'
+        const newAccountBalance = 2000.00
+        const newAccountType = 'Savings Account'
+        const newAccountStatus = 'Active'
+        
+        await dashBoardPage.clickAddAccountBtn()
+        await accountsPage.setAccountName(newAccountName)
+        await accountsPage.selectAccountType(newAccountType)
+        await accountsPage.setInitialAccountBalance(newAccountBalance)
+        await accountsPage.setAccountStatus(newAccountStatus)
+        await accountsPage.saveNewAccount()
+        await accountsPage.waitForSuccessToast();
+
+        const accountNumber = await accountsPage.getAccountNumberByAccountName(newAccountName)
+
+        await navigationPage.gotoDashboard();
+        await waitForStableText(dashBoardPage.totalBalanceValue);
+
+        const pinnedAccountInfoDisplayed = await dashBoardPage.getPinnedAccountInfo(newAccountName);
+
+        expect(newAccountName).toBe(pinnedAccountInfoDisplayed['accountNameDisplayed'])
+        expect(newAccountBalance).toBe(extractNumberFromString(pinnedAccountInfoDisplayed['accountBalance']))
+        expect(getShortAccountType(newAccountType)).toBe(pinnedAccountInfoDisplayed['accountType'])
+        expect(accountNumber).toBe(pinnedAccountInfoDisplayed['accountNumber'])
+
+        const accountsOverviewInfoDisplayed = await dashBoardPage.getAccountsoverviewAccountInfo(newAccountName);
+
+        expect(newAccountStatus).toBe(accountsOverviewInfoDisplayed['accountStatus'])
+        expect(newAccountName).toBe(accountsOverviewInfoDisplayed['accountNameDisplayed'])
+        expect(newAccountBalance).toBe(extractNumberFromString(accountsOverviewInfoDisplayed['accountBalance']))
+        expect(getShortAccountType(newAccountType)).toBe(accountsOverviewInfoDisplayed['accountType'])
+        expect(accountNumber).toBe(accountsOverviewInfoDisplayed['accountNumber'])
     })
 
 });

@@ -68,4 +68,8 @@ export class AccountsPage {
     async getAccountsTableRowByValue(text: string){
         return this.accountsTable.getByTestId(/^account-row-/).filter({ hasText: text})
     }
+
+    async getAccountNumberByAccountName(accountName: string){
+        return await (await this.getAccountsTableRowByValue(accountName)).getByTestId('account-number').textContent()
+    }
 }
